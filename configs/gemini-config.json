@@ -1,0 +1,158 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/2025-06-18/config.json",
+  "version": "2025-06-18",
+  "name": "mcp-bitnovo-pay",
+  "description": "Google Gemini MCP configuration for Bitnovo Pay server",
+
+  "gemini_cli": {
+    "comment": "Configuration for Gemini CLI with MCP server",
+    "install_command": "npm install -g @google/gemini-cli@latest",
+    "server_registration": {
+      "command": "gemini mcp add bitnovo-pay",
+      "config": {
+        "name": "bitnovo-pay",
+        "command": "node",
+        "args": ["/path/to/mcp-bitnovo-pay/dist/index.js"],
+        "env": {
+          "BITNOVO_DEVICE_ID": "${BITNOVO_DEVICE_ID}",
+          "BITNOVO_BASE_URL": "${BITNOVO_BASE_URL}",
+          "BITNOVO_DEVICE_SECRET": "${BITNOVO_DEVICE_SECRET}"
+        }
+      }
+    },
+    "usage_commands": [
+      "gemini mcp list",
+      "gemini mcp enable bitnovo-pay",
+      "gemini mcp disable bitnovo-pay",
+      "gemini mcp remove bitnovo-pay"
+    ]
+  },
+
+  "fastmcp": {
+    "comment": "Alternative setup using FastMCP (Python)",
+    "install_command": "pip install fastmcp>=2.12.3",
+    "integration_example": {
+      "python_code": "from fastmcp import FastMCP\n\n# Install MCP server\nfastmcp.install('bitnovo-pay', {\n  'command': 'node',\n  'args': ['/path/to/mcp-bitnovo-pay/dist/index.js'],\n  'env': {\n    'BITNOVO_DEVICE_ID': 'your_device_id',\n    'BITNOVO_BASE_URL': 'https://pos.bitnovo.com'\n  }\n})"
+    }
+  },
+
+  "transport": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["/path/to/mcp-bitnovo-pay/dist/index.js"],
+    "cwd": "/path/to/mcp-bitnovo-pay",
+    "env": {
+      "BITNOVO_DEVICE_ID": "${BITNOVO_DEVICE_ID}",
+      "BITNOVO_BASE_URL": "${BITNOVO_BASE_URL}",
+      "BITNOVO_DEVICE_SECRET": "${BITNOVO_DEVICE_SECRET}",
+      "NODE_ENV": "production"
+    }
+  },
+
+  "environment": {
+    "comment": "Environment variables required for the MCP server",
+    "required": {
+      "BITNOVO_DEVICE_ID": "Your Bitnovo Pay Device ID",
+      "BITNOVO_BASE_URL": "https://pos.bitnovo.com (production) or https://dev-payments.pre-bnvo.com (development)"
+    },
+    "optional": {
+      "BITNOVO_DEVICE_SECRET": "Your Bitnovo Pay Device Secret for webhook validation"
+    }
+  },
+
+  "gemini_models": {
+    "comment": "Latest Gemini models for MCP integration (September 2025)",
+    "supported": [
+      "gemini-2.5-flash-preview-09-2025",
+      "gemini-2.5-flash-lite-preview-09-2025",
+      "gemini-2.5-pro",
+      "gemini-2.0-flash",
+      "gemini-1.5-pro",
+      "gemini-1.5-flash"
+    ],
+    "recommended": "gemini-2.5-flash-preview-09-2025",
+    "features": {
+      "function_calling": true,
+      "multimodal": true,
+      "code_generation": true,
+      "structured_output": true
+    }
+  },
+
+  "tool_response_format": {
+    "comment": "Expected response format for Gemini MCP tools",
+    "content_blocks": {
+      "text": {
+        "type": "text",
+        "text": "Response text content"
+      },
+      "image": {
+        "type": "image",
+        "data": "BASE64_ENCODED_IMAGE_DATA",
+        "mimeType": "image/png"
+      }
+    },
+    "example": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Payment created successfully"
+        },
+        {
+          "type": "image",
+          "data": "iVBORw0KGgoAAAANSUhEUgAA...",
+          "mimeType": "image/png"
+        }
+      ]
+    }
+  },
+
+  "capabilities": {
+    "comment": "MCP capabilities provided by this server",
+    "tools": {
+      "create_payment_onchain": {
+        "description": "Create cryptocurrency payments with specific addresses",
+        "parameters": ["amount_eur", "input_currency", "fiat", "notes"]
+      },
+      "create_payment_redirect": {
+        "description": "Create web-based payment links",
+        "parameters": ["amount_eur", "url_ok", "url_ko", "fiat", "notes"]
+      },
+      "get_payment_status": {
+        "description": "Check payment status and details",
+        "parameters": ["identifier"]
+      },
+      "list_currencies_catalog": {
+        "description": "Get supported cryptocurrencies",
+        "parameters": ["filter_by_amount"]
+      },
+      "generate_payment_qr": {
+        "description": "Generate QR codes for payments",
+        "parameters": ["identifier", "qr_type", "size", "style", "branding"]
+      }
+    },
+    "resources": [],
+    "prompts": []
+  },
+
+  "security": {
+    "comment": "Security considerations for Gemini integration",
+    "recommendations": [
+      "Store credentials in environment variables, not in this config",
+      "Use HTTPS endpoints only",
+      "Enable HMAC validation with BITNOVO_DEVICE_SECRET",
+      "Monitor API usage and set appropriate rate limits",
+      "Use production BITNOVO_BASE_URL for live payments",
+      "Validate function parameters before processing"
+    ]
+  },
+
+  "troubleshooting": {
+    "common_issues": {
+      "server_not_starting": "Check Node.js version >= 18.0.0 and build status",
+      "env_vars_missing": "Ensure BITNOVO_DEVICE_ID and BITNOVO_BASE_URL are set",
+      "permission_denied": "Check file permissions on dist/index.js",
+      "timeout_errors": "Verify network connectivity to Bitnovo API"
+    }
+  }
+}

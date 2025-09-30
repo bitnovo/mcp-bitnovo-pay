@@ -1,0 +1,44 @@
+# Ensure we don't ship extras ("files" in package.json already whitelists dist, LICENSE)
+
+# Unrelated subprojects and heavy assets
+backend-reference/
+media/
+logs/
+*.log
+.claude/
+
+# Tests and coverage
+tests/
+coverage/
+
+# Temporary files
+.tmp/
+tmp/
+
+# Local dependencies
+node_modules/
+
+# Archives and binaries
+*.zip
+*.tgz
+*.ipynb
+
+# Project docs not needed in npm
+bitnovo-pay-documentation.md
+DIAGNOSTIC-SUMMARY.md
+PRD.md
+REFACTOR-SUMMARY.md
+TESTING.md
+RATE-FIELD-REMOVAL.md
+tpv.zip
+TPV- FRONT local.postman_collection.json
+
+# Keep dist/ (built output) — do not ignore
+# dist/
+
+# Test and helper scripts (not for publish)
+test-currencies.js
+test-mcp-client.ts
+test-payment-creation.js
+test*.js
+

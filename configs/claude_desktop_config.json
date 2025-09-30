@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+      "bitnovo-pay": {
+        "command": "node",
+        "args": ["/path/to/mcp-bitnovo-pay/dist/index.js"],
+        "cwd": "/path/to/mcp-bitnovo-pay",
+        "env": {
+          "BITNOVO_DEVICE_ID": "your_device_id_here",
+          "BITNOVO_BASE_URL": "https://pos.bitnovo.com",
+          "BITNOVO_DEVICE_SECRET": "your_device_secret_here_optional"
+        }
+      }
+    }
+  }

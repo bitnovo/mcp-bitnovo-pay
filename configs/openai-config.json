@@ -1,0 +1,89 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/2025-06-18/config.json",
+  "version": "2025-06-18",
+  "name": "mcp-bitnovo-pay",
+  "description": "OpenAI MCP configuration for Bitnovo Pay server",
+
+  "responses_api": {
+    "comment": "Configuration for OpenAI Responses API",
+    "model": "gpt-5",
+    "tools": [
+      {
+        "type": "mcp",
+        "server_url": "stdio://node /path/to/mcp-bitnovo-pay/dist/index.js",
+        "server_label": "bitnovo-pay",
+        "require_approval": "never",
+        "allowed_tools": [
+          "create_payment_onchain",
+          "create_payment_redirect",
+          "get_payment_status",
+          "list_currencies_catalog",
+          "generate_payment_qr"
+        ]
+      }
+    ]
+  },
+
+  "agents_sdk": {
+    "comment": "Configuration for OpenAI Agents SDK (Python)",
+    "tool_config": {
+      "type": "mcp",
+      "server_label": "bitnovo-pay",
+      "server_url": "stdio://node /path/to/mcp-bitnovo-pay/dist/index.js",
+      "require_approval": "never",
+      "allowed_tools": [
+        "create_payment_onchain",
+        "create_payment_redirect",
+        "get_payment_status",
+        "list_currencies_catalog",
+        "generate_payment_qr"
+      ]
+    }
+  },
+
+  "environment": {
+    "comment": "Environment variables required for the MCP server",
+    "required": {
+      "BITNOVO_DEVICE_ID": "Your Bitnovo Pay Device ID",
+      "BITNOVO_BASE_URL": "https://pos.bitnovo.com (production) or https://dev-payments.pre-bnvo.com (development)"
+    },
+    "optional": {
+      "BITNOVO_DEVICE_SECRET": "Your Bitnovo Pay Device Secret for webhook validation"
+    }
+  },
+
+  "transport": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["/path/to/mcp-bitnovo-pay/dist/index.js"],
+    "env": {
+      "BITNOVO_DEVICE_ID": "${BITNOVO_DEVICE_ID}",
+      "BITNOVO_BASE_URL": "${BITNOVO_BASE_URL}",
+      "BITNOVO_DEVICE_SECRET": "${BITNOVO_DEVICE_SECRET}"
+    }
+  },
+
+  "security": {
+    "comment": "Security considerations for OpenAI integration",
+    "recommendations": [
+      "Store credentials in environment variables, not in this config",
+      "Use HTTPS endpoints only",
+      "Enable HMAC validation with BITNOVO_DEVICE_SECRET",
+      "Monitor API usage and set appropriate rate limits",
+      "Use production BITNOVO_BASE_URL for live payments"
+    ]
+  },
+
+  "capabilities": {
+    "comment": "MCP capabilities provided by this server",
+    "tools": {
+      "create_payment_onchain": "Create cryptocurrency payments with specific addresses",
+      "create_payment_redirect": "Create web-based payment links",
+      "get_payment_status": "Check payment status and details",
+      "list_currencies_catalog": "Get supported cryptocurrencies",
+      "generate_payment_qr": "Generate QR codes for payments"
+    },
+    "resources": [],
+    "prompts": []
+  }
+}
