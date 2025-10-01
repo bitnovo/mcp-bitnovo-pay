@@ -65,7 +65,7 @@ Add this configuration to your MCP client config file:
   "mcpServers": {
     "bitnovo-pay": {
       "command": "npx",
-      "args": ["-y", "mcp-bitnovo-pay"],
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id_here",
         "BITNOVO_BASE_URL": "https://pos.bitnovo.com"
@@ -82,7 +82,7 @@ Add this configuration to your MCP client config file:
   "mcpServers": {
     "bitnovo-pay": {
       "command": "npx",
-      "args": ["-y", "mcp-bitnovo-pay"],
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id_here",
         "BITNOVO_BASE_URL": "https://pos.bitnovo.com"
@@ -109,7 +109,7 @@ Ask your AI assistant: *"Create a payment for 10 euros"*
 **No installation required!** The `npx` command automatically downloads and runs the latest version.
 
 ```bash
-npx -y mcp-bitnovo-pay
+npx -y @bitnovopay/mcp-bitnovo-pay
 ```
 
 **Advantages**:
@@ -126,6 +126,9 @@ For contributors or advanced users who need to modify the code:
 # Clone the repository
 git clone https://github.com/bitnovo/mcp-bitnovo-pay.git
 cd mcp-bitnovo-pay
+
+# Or install from npm
+npm install -g @bitnovopay/mcp-bitnovo-pay
 
 # Install dependencies
 npm install
@@ -158,7 +161,7 @@ Choose your AI platform and follow the specific setup guide:
   "mcpServers": {
     "bitnovo-pay": {
       "command": "npx",
-      "args": ["-y", "mcp-bitnovo-pay"],
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id_here",
         "BITNOVO_BASE_URL": "https://pos.bitnovo.com"
@@ -174,7 +177,7 @@ Choose your AI platform and follow the specific setup guide:
   "mcpServers": {
     "bitnovo-pay": {
       "command": "npx",
-      "args": ["-y", "mcp-bitnovo-pay"],
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id_here",
         "BITNOVO_BASE_URL": "https://pos.bitnovo.com",
@@ -201,7 +204,7 @@ Choose your AI platform and follow the specific setup guide:
   "mcpServers": {
     "bitnovo-pay": {
       "command": "npx",
-      "args": ["-y", "mcp-bitnovo-pay"],
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id_here",
         "BITNOVO_BASE_URL": "https://pos.bitnovo.com"
@@ -222,7 +225,7 @@ Choose your AI platform and follow the specific setup guide:
   "mcpServers": {
     "bitnovo-pay": {
       "command": "npx",
-      "args": ["-y", "mcp-bitnovo-pay"],
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id_here",
         "BITNOVO_BASE_URL": "https://pos.bitnovo.com"

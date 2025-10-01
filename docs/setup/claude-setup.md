@@ -32,7 +32,25 @@ Create or edit your Claude Desktop configuration file:
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 - **Linux**: `~/.config/Claude/claude_desktop_config.json`
 
-**Configuration** (use the file from [`configs/claude_desktop_config.json`](../../configs/claude_desktop_config.json)):
+**Option 1: Using npx (Recommended - Always Latest Version)**:
+
+```json
+{
+  "mcpServers": {
+    "bitnovo-pay": {
+      "command": "npx",
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
+      "env": {
+        "BITNOVO_DEVICE_ID": "your_device_id_here",
+        "BITNOVO_BASE_URL": "https://pos.bitnovo.com",
+        "BITNOVO_DEVICE_SECRET": "your_device_secret_here"
+      }
+    }
+  }
+}
+```
+
+**Option 2: Using Local Installation** (use the file from [`configs/claude_desktop_config.json`](../../configs/claude_desktop_config.json)):
 
 ```json
 {
@@ -75,6 +93,24 @@ Claude Code integrates directly into VS Code for development workflows.
 
 Claude Code automatically detects `.mcp.json` files in your project root:
 
+**Using npx (Recommended)**:
+```json
+{
+  "mcpServers": {
+    "bitnovo-pay": {
+      "command": "npx",
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
+      "env": {
+        "BITNOVO_DEVICE_ID": "your_device_id_here",
+        "BITNOVO_BASE_URL": "https://pos.bitnovo.com",
+        "BITNOVO_DEVICE_SECRET": "your_device_secret_here"
+      }
+    }
+  }
+}
+```
+
+**Using Local Installation**:
 ```json
 {
   "mcpServers": {

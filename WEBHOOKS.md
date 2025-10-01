@@ -43,8 +43,8 @@ The easiest setup - tunnel is **automatically configured** based on your environ
 {
   "mcpServers": {
     "bitnovo-pay": {
-      "command": "node",
-      "args": ["/path/to/mcp-bitnovo-pay/dist/index.js"],
+      "command": "npx",
+      "args": ["-y", "@bitnovopay/mcp-bitnovo-pay"],
       "env": {
         "BITNOVO_DEVICE_ID": "your_device_id",
         "BITNOVO_BASE_URL": "https://dev-payments.pre-bnvo.com",

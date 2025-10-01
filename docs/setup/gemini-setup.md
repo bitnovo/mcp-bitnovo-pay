@@ -41,6 +41,26 @@ gcloud auth application-default login
 
 #### MCP Server Registration
 
+**Option 1: Using npx (Recommended - Always Latest Version)**:
+
+```bash
+# Add MCP server to Gemini CLI using npx
+gemini mcp add bitnovo-pay \
+  --command "npx" \
+  --args "-y @bitnovopay/mcp-bitnovo-pay" \
+  --env BITNOVO_DEVICE_ID="your_device_id" \
+  --env BITNOVO_BASE_URL="https://pos.bitnovo.com" \
+  --env BITNOVO_DEVICE_SECRET="your_secret"
+
+# Enable the MCP server
+gemini mcp enable bitnovo-pay
+
+# Verify the server is registered
+gemini mcp list
+```
+
+**Option 2: Using Local Installation**:
+
 ```bash
 # Navigate to your MCP server directory
 cd /path/to/mcp-bitnovo-pay
@@ -91,6 +111,38 @@ fastmcp install gemini-cli
 
 #### Configuration
 
+**Using npx (Recommended)**:
+```python
+from fastmcp import FastMCP
+import os
+
+# Configure environment
+os.environ['BITNOVO_DEVICE_ID'] = 'your_device_id'
+os.environ['BITNOVO_BASE_URL'] = 'https://pos.bitnovo.com'
+os.environ['BITNOVO_DEVICE_SECRET'] = 'your_secret'  # Optional
+
+# Install MCP server using npx
+fastmcp.install('bitnovo-pay', {
+    'command': 'npx',
+    'args': ['-y', '@bitnovopay/mcp-bitnovo-pay'],
+    'env': {
+        'BITNOVO_DEVICE_ID': os.environ['BITNOVO_DEVICE_ID'],
+        'BITNOVO_BASE_URL': os.environ['BITNOVO_BASE_URL'],
+        'BITNOVO_DEVICE_SECRET': os.environ.get('BITNOVO_DEVICE_SECRET', '')
+    }
+})
+
+# Use with Gemini
+from google.generativeai import GenerativeModel
+
+model = GenerativeModel('gemini-2.5-pro')
+response = model.generate_content(
+    "Create a Bitcoin payment for 75 euros",
+    tools=fastmcp.get_tools('bitnovo-pay')
+)
+```
+
+**Using local installation**:
 ```python
 from fastmcp import FastMCP
 import os

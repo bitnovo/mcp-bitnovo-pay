@@ -19,7 +19,30 @@ The Responses API is the easiest way to integrate MCP tools with OpenAI models.
 
 #### Configuration
 
-Use the configuration from [`configs/openai-config.json`](../../configs/openai-config.json):
+**Option 1: Using npx (Recommended - Always Latest Version)**:
+
+```json
+{
+  "model": "gpt-4.1",
+  "tools": [
+    {
+      "type": "mcp",
+      "server_url": "stdio://npx -y @bitnovopay/mcp-bitnovo-pay",
+      "server_label": "bitnovo-pay",
+      "require_approval": "never",
+      "allowed_tools": [
+        "create_payment_onchain",
+        "create_payment_redirect",
+        "get_payment_status",
+        "list_currencies_catalog",
+        "generate_payment_qr"
+      ]
+    }
+  ]
+}
+```
+
+**Option 2: Using Local Installation** (use the configuration from [`configs/openai-config.json`](../../configs/openai-config.json)):
 
 ```json
 {
@@ -55,6 +78,27 @@ export BITNOVO_DEVICE_SECRET="your_secret_here"  # Optional
 
 #### API Usage Example
 
+**Using npx**:
+```python
+import openai
+
+# Configure your API call
+response = openai.completions.create(
+  model="gpt-4.1",
+  tools=[{
+    "type": "mcp",
+    "server_url": "stdio://npx -y @bitnovopay/mcp-bitnovo-pay",
+    "server_label": "bitnovo-pay",
+    "require_approval": "never"
+  }],
+  messages=[{
+    "role": "user",
+    "content": "Create a Bitcoin payment for 50 euros"
+  }]
+)
+```
+
+**Using local installation**:
 ```python
 import openai
 
@@ -86,6 +130,32 @@ pip install openai-agents
 
 #### Configuration
 
+**Using npx (Recommended)**:
+```python
+from openai_agents import HostedMCPTool
+
+# Create MCP tool
+bitnovo_tool = HostedMCPTool(
+    tool_config={
+        "type": "mcp",
+        "server_label": "bitnovo-pay",
+        "server_url": "stdio://npx -y @bitnovopay/mcp-bitnovo-pay",
+        "require_approval": "never",
+        "allowed_tools": [
+            "create_payment_onchain",
+            "create_payment_redirect",
+            "get_payment_status",
+            "list_currencies_catalog",
+            "generate_payment_qr"
+        ]
+    }
+)
+
+# Use in your agent
+agent = Agent(tools=[bitnovo_tool])
+```
+
+**Using local installation**:
 ```python
 from openai_agents import HostedMCPTool
 

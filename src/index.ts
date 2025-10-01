@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // MCP Bitnovo Pay Integration Server Entry Point
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
