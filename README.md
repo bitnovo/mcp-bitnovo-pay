@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/bitnovo-mcp-bitnovo-pay-badge.png)](https://mseep.ai/app/bitnovo-mcp-bitnovo-pay)
+
 # MCP Bitnovo Pay
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
